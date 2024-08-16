@@ -12,20 +12,36 @@ void main() {
       //Load app widget
       await tester.pumpWidget(const MyApp());
 
+      var numberZero = find.text('0');
+
+      var numberOne = find.text('1');
+
       //Verify if the counter starts at 0
-      expect(find.text('0'), findsOneWidget);
+      expect(numberZero, findsOneWidget);
 
       //Finds the floating action button to tap on.
-      final fab = find.byKey(const ValueKey('increment'));
+      final fabAdd = find.byKey(const ValueKey('increment'));
 
       //Emulate a tap on the floating action button.
-      await tester.tap(fab);
+      await tester.tap(fabAdd);
 
       //Trigger a frame.
       await tester.pumpAndSettle();
 
       //Verify the counter increments by 1.
-      expect(find.text('1'), findsOneWidget);
+      expect(numberOne, findsOneWidget);
+
+      //Finds the floating action button to tap on.
+      final fabDecrement = find.byKey(const ValueKey('decrement'));
+
+      //Emulate a tap on the floating action button.
+      await tester.tap(fabDecrement);
+
+      //Trigger a frame.
+      await tester.pumpAndSettle();
+
+      //Verify the counter decrements by 1.
+      expect(numberZero, findsOneWidget);
     });
   });
 }
